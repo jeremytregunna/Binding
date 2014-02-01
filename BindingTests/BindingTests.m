@@ -9,9 +9,14 @@
 #import <XCTest/XCTest.h>
 #import "Binding.h"
 
+@interface Binding (PrivateMethodsForBindingTests)
+@property (nonatomic, readonly) BOOL completed;
+@end
+
 @interface BindingTests : XCTestCase
 @property (nonatomic, strong) Binding* binding;
 @property (nonatomic, strong) NSString* dummy;
+@property (nonatomic, strong) NSString* destination;
 @end
 
 @implementation BindingTests
@@ -25,7 +30,8 @@
 
 - (void)tearDown
 {
-    self.dummy = nil;
+    self.dummy       = nil;
+    self.destination = nil;
 
     [super tearDown];
 }
@@ -93,6 +99,25 @@
     [self.binding complete];
 
     self.dummy = @"won't fire";
+}
+
+- (void)testPropogatesValueThroughToSecondBindingWhenJoined
+{
+    Binding* b = Bind(self, destination);
+    [self.binding joinWith:b];
+
+    self.dummy = @"propogation";
+
+    XCTAssertEqualObjects(self.destination, @"propogation", @"Propogates values through to the destination key path when joined.");
+}
+
+- (void)testDoesntCompleteJoinedBindingsWhenOneBindingIsCompleted
+{
+    Binding* b = Bind(self, destination);
+    [self.binding joinWith:b];
+    [self.binding complete];
+
+    XCTAssertFalse(b.completed, @"Joined bindings must not be complete when a binding they are joined to completes");
 }
 
 @end

@@ -67,7 +67,7 @@ static void* BindingContext = &BindingContext;
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
-#pragma mark - Operations
+#pragma mark - Private Operations
 
 - (void)invalidate
 {
@@ -93,6 +93,8 @@ static void* BindingContext = &BindingContext;
     }
 }
 
+#pragma mark - Public Operations
+
 - (instancetype)next:(BindingFunction)fn
 {
     BindingFunction f = [fn copy];
@@ -109,6 +111,13 @@ static void* BindingContext = &BindingContext;
     self.completed = YES;
     [self.nextBlocks removeAllObjects];
     [_target removeObserver:self forKeyPath:_keyPath context:BindingContext];
+}
+
+- (instancetype)joinWith:(Binding*)binding
+{
+    return [self next:^(id value) {
+        [binding.target setValue:value forKeyPath:binding.keyPath];
+    }];
 }
 
 @end
