@@ -1,0 +1,6 @@
+---
+language: objective-c
+rvm:
+  - 1.9.3
+before_install: gem install cocoapods
+script: xctool -workspace Binding.xcodeproj -scheme Binding -sdk iphonesimulator test
