@@ -20,7 +20,7 @@
 {
     [super setUp];
 
-    self.binding = [Binding bindTarget:self selector:@selector(dummy)];
+    self.binding = Bind(self, dummy);
 }
 
 - (void)tearDown

@@ -10,6 +10,8 @@
 
 typedef void (^BindingFunction)(id value);
 
+#define Bind(obj, kp) [Binding bindTarget:(obj) keyPath:(@"" # kp)]
+
 @interface Binding : NSObject
 
 + (instancetype)bindTarget:(id)target selector:(SEL)selector;
