@@ -48,7 +48,11 @@
 
 - (void)dealloc
 {
-    [_target removeObserver:self forKeyPath:_keyPath context:BindingContext];
+    if(!_completed)
+        [self complete];
+
+    _target  = nil;
+    _keyPath = nil;
 }
 
 #pragma mark - KVO
@@ -102,8 +106,9 @@ static void* BindingContext = &BindingContext;
 
 - (void)complete
 {
-    [self.nextBlocks removeAllObjects];
     self.completed = YES;
+    [self.nextBlocks removeAllObjects];
+    [_target removeObserver:self forKeyPath:_keyPath context:BindingContext];
 }
 
 @end
