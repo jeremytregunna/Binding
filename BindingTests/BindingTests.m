@@ -104,7 +104,7 @@
 - (void)testPropogatesValueThroughToSecondBindingWhenJoined
 {
     Binding* b = Bind(self, destination);
-    [self.binding joinWith:b];
+    [self.binding relate:b];
 
     self.dummy = @"propogation";
 
@@ -114,7 +114,7 @@
 - (void)testDoesntCompleteJoinedBindingsWhenOneBindingIsCompleted
 {
     Binding* b = Bind(self, destination);
-    [self.binding joinWith:b];
+    [self.binding relate:b];
     [self.binding complete];
 
     XCTAssertFalse(b.completed, @"Joined bindings must not be complete when a binding they are joined to completes");

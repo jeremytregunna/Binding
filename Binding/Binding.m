@@ -113,7 +113,7 @@ static void* BindingContext = &BindingContext;
     [_target removeObserver:self forKeyPath:_keyPath context:BindingContext];
 }
 
-- (instancetype)joinWith:(Binding*)binding
+- (instancetype)relate:(Binding*)binding
 {
     return [self next:^(id value) {
         [binding.target setValue:value forKeyPath:binding.keyPath];

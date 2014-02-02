@@ -53,19 +53,20 @@ typedef void (^BindingFunction)(id value);
 /** Signal to the binding to stop sending updates. */
 - (void)complete;
 
-/** Connects two bindings together.
+/** Relates two bindings to one another.
  
  For instance, consider this source code:
  
     Binding* a = Bind(self, name);
     Binding* b = Bind(self.textField, text);
-    Binding* c = [a joinWith:b];
+    Binding* c = [a relate:b];
     self.name = @"Tom";
-    // self.textField.text automatically gets set the string @"Tom".
+ 
+ In this example, *b* is said to relate to *a*. The *self.textField.text* property will have the value it holds set to the string @"Tom" when the local *name* property updates.
  
  @param destination The destination binding
  @return The receiver after being connected with the destination.
  */
-- (instancetype)joinWith:(Binding*)binding;
+- (instancetype)relate:(Binding*)binding;
 
 @end
