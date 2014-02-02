@@ -108,9 +108,12 @@ static void* BindingContext = &BindingContext;
 
 - (void)complete
 {
-    self.completed = YES;
-    [self.nextBlocks removeAllObjects];
-    [_target removeObserver:self forKeyPath:_keyPath context:BindingContext];
+    if(!_completed)
+    {
+        self.completed = YES;
+        [self.nextBlocks removeAllObjects];
+        [_target removeObserver:self forKeyPath:_keyPath context:BindingContext];
+    }
 }
 
 - (instancetype)relate:(Binding*)binding

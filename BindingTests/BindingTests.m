@@ -101,6 +101,12 @@
     self.dummy = @"won't fire";
 }
 
+- (void)testNoCrashAfterCompletingTwice
+{
+    [self.binding complete];
+    XCTAssertNoThrow([self.binding complete], @"Doesn't crash if completed multiple times");
+}
+
 - (void)testPropogatesValueThroughToSecondBindingWhenJoined
 {
     Binding* b = Bind(self, destination);
