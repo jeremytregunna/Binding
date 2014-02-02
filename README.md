@@ -6,7 +6,7 @@ Binding is a library that provides an implementation of a time-varying variable.
 It is an essential ingredient for any reactive system.
 
 This library is intended, not as a replacement for a functional-reactive
-library, such as [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa), but as a less-scary, tool which allows
+library, such as [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa), but as a less-scary tool which allows
 you to write code in a reactive way. It's also a wonderful way to remove
 a lot of boilerplate typically invovled with managing state.
 
@@ -85,7 +85,7 @@ the work of placing that state where it knows is best. You then conceivably
 have 10 custom setters, all basically doing the same thing: Setting some local
 instance level state, and some value on some subview. This is less than ideal.
 
-Consider then, this implementation, using binding.
+Consider then, this implementation, using bindings:
 
 ```objc
 // Implementation
