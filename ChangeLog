@@ -1,0 +1,22 @@
+2014-02-02  1.1.0 by Jeremy Tregunna <jeremy@tregunna.ca>
+
+    * Add relate: method which takes another binding. Using this feature, you can
+      now relate multiple bindings to one another, allowing for binding
+      relationships to be expressed.
+
+    * Fix a possible KVO crash when marking a binding as complete more than once.
+      This action now silently ignores multiple requests.
+
+2014-01-31  1.0.0 by Jeremy Tregunna <jeremy@tregunna.ca>
+
+    * Add documentation in appledoc format.
+
+    * Add podspec
+
+    * Add Bind macro shorthand
+
+    * Add observation feature
+
+    * Add value propogation feature
+
+    * Add completion feature
