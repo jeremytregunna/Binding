@@ -11,7 +11,7 @@
 
 @interface Binding ()
 @property (nonatomic) OSSpinLock lock;
-@property (nonatomic, strong) id target;
+@property (nonatomic, weak) id target;
 @property (nonatomic, copy) NSString* keyPath;
 @property (nonatomic, getter=isEvaluating) BOOL evaluating;
 @property (nonatomic) BOOL needsEvaluation;
@@ -51,7 +51,6 @@
     if(!_completed)
         [self complete];
 
-    _target  = nil;
     _keyPath = nil;
 }
 
