@@ -49,6 +49,9 @@ typedef void (^BindingFunction)(id value);
  @return The binding
  */
 - (instancetype)next:(BindingFunction)fn;
+/** same as next but block is triggered immediately with current value of target
+*/
+- (instancetype)triggerNext:(BindingFunction)fn;
 
 /** Signal to the binding to stop sending updates. */
 - (void)complete;

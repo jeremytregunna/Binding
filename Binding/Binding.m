@@ -8,6 +8,7 @@
 
 #import "Binding.h"
 #import <libkern/OSAtomic.h>
+#import <Binding/Binding.h>
 
 @interface Binding ()
 @property (nonatomic) OSSpinLock lock;
@@ -103,6 +104,12 @@ static void* BindingContext = &BindingContext;
     OSSpinLockUnlock(&_lock);
 
     return self;
+}
+
+- (instancetype)triggerNext:(BindingFunction)fn {
+    Binding *binding = [self next:fn];
+    fn([[binding target] valueForKeyPath:binding.keyPath]);
+    return binding;
 }
 
 - (void)complete
